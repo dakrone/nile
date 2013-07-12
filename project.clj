@@ -1,4 +1,4 @@
-(defproject nile "1.0"
+(defproject nile "1.1-SNAPSHOT"
   :description "Stream utilities for everyday Clojure use."
   :url "https://github.com/dakrone/nile"
   :license {:name "Eclipse Public License"
