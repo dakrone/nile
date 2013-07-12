@@ -19,7 +19,15 @@ Then, to use:
 (ns myns.foo
   (:require [nile.streams :refer [split-input-stream counted-stream]]))
 
-;; Documentation coming, see test/nile/streams.clj for usage
+(def orig (java.io.ByteArrayInputStream. (.getBytes "test data")))
+
+;; Split the stream into three streams
+(let [[f streams] (split-input-stream orig 3)
+      readers (doall (for [stream streams]
+                       (future (slurp stream))))]
+  (= ["test data" "test data" "test data"]
+     (map deref readers)))
+;; => true
 ```
 
 ### split-input-stream
@@ -39,7 +47,8 @@ streams to be read.  Streams can be read as fast as the slowest
 reader.
 
 Returns a tuple of the future and sequence of input-streams, so
-derefing the future can be blocked on if desired.
+derefing the future can be blocked on if desired. The deref'd future
+will be `true` if successful, or an Exception object if unsuccessful.
 
 ### counted-stream
 
@@ -51,6 +60,8 @@ Decorate a stream to turn it into a counted stream, which will keep
 track of the bytes that have passed through the stream. Once the
 stream has been closed, the handler will be called with the count of
 bytes that have been passed through the stream.
+
+Note: works on either an InputStream or an OutputStream
 
 ## License
 
