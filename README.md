@@ -1,9 +1,9 @@
-# nile
+# Nile
 
 Stream utilities for everyday Clojure use, published because I find
 myself using them over and over again in different projects.
 
-Only works with Clojure 1.5, sorry.
+Only works with Clojure 1.5.x, sorry.
 
 ## Usage
 
@@ -18,7 +18,12 @@ Then, to use:
 ```clojure
 (ns myns.foo
   (:require [nile.streams :refer [split-input-stream counted-stream]]))
+```
 
+Splitting streams into multiple streams without reading all of the
+data up front:
+
+```clojure
 (def orig (java.io.ByteArrayInputStream. (.getBytes "test data")))
 
 ;; Split the stream into three streams
@@ -28,7 +33,11 @@ Then, to use:
   (= ["test data" "test data" "test data"]
      (map deref readers)))
 ;; => true
+```
 
+Define a handler for getting the counts of an InputStream or OutputStream:
+
+```clojure
 (let [in (counted-stream (java.io.ByteArrayInputStream.
                           (.getBytes "test-data"))
                          (fn [cnt] (println cnt "bytes were read")))]
