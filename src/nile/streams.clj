@@ -63,9 +63,3 @@
    :else
    (throw
     (Exception. "Input stream is neither an InputStream nor OutputStream"))))
-
-(defn handled-stream
-  "TODO Document me!"
-  [stream handler-map]
-  ;; TODO Implement me!
-  )
