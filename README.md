@@ -3,6 +3,8 @@
 Stream utilities for everyday Clojure use, published because I find
 myself using them over and over again in different projects.
 
+Only works with Clojure 1.5, sorry.
+
 ## Usage
 
 In your project.clj:
