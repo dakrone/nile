@@ -17,7 +17,7 @@ Then, to use:
 (ns myns.foo
   (:require [nile.streams :refer [split-input-stream counted-stream]]))
 
-
+;; Documentation coming, see test/nile/streams.clj for usage
 ```
 
 ### split-input-stream
