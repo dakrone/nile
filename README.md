@@ -28,6 +28,12 @@ Then, to use:
   (= ["test data" "test data" "test data"]
      (map deref readers)))
 ;; => true
+
+(let [in (counted-stream (java.io.ByteArrayInputStream.
+                          (.getBytes "test-data"))
+                         (fn [cnt] (println cnt "bytes were read")))]
+  (slurp in))
+;; => "9 bytes were read"
 ```
 
 ### split-input-stream
